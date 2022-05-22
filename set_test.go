@@ -72,6 +72,88 @@ func TestIsEmptyWithNoneEmptySet(t *testing.T) {
 
 }
 
+func TestContainsEmptySet(t *testing.T) {
+	hashSet := NewHashSet[playerKey, *player]()
+
+	got := hashSet.Contains(newPlayer("1"))
+	expected := false
+
+	if got != expected {
+		t.Errorf("Expected: %v, got: %v", expected, got)
+	}
+
+}
+
+func TestContainsNoneExistentEntry(t *testing.T) {
+	hashSet := NewHashSet[playerKey, *player]()
+
+	hashSet.Add(newPlayer("1"))
+
+	got := hashSet.Contains(newPlayer("2"))
+	expected := false
+
+	if got != expected {
+		t.Errorf("Expected: %v, got: %v", expected, got)
+	}
+
+}
+
+func TestContainsExistentEntry(t *testing.T) {
+	hashSet := NewHashSet[playerKey, *player]()
+
+	hashSet.Add(newPlayer("1"))
+
+	got := hashSet.Contains(newPlayer("1"))
+	expected := true
+
+	if got != expected {
+		t.Errorf("Expected: %v, got: %v", expected, got)
+	}
+
+}
+
+func TestDeleteExistentEntry(t *testing.T) {
+	hashSet := NewHashSet[playerKey, *player]()
+
+	hashSet.Add(newPlayer("1"))
+
+	if !hashSet.Contains(newPlayer("1")) {
+		t.Errorf("Cannot add player 1")
+	}
+
+	//Removing player
+	hashSet.Remove(newPlayer("1"))
+
+	got := hashSet.Contains(newPlayer("1"))
+	expected := false
+
+	if got != expected {
+		t.Errorf("Expected: %v, got: %v", expected, got)
+	}
+
+}
+
+func TestDeleteNoneExistentEntry(t *testing.T) {
+	hashSet := NewHashSet[playerKey, *player]()
+
+	hashSet.Add(newPlayer("1"))
+
+	if !hashSet.Contains(newPlayer("1")) {
+		t.Errorf("Cannot add player 1")
+	}
+
+	//Removing none existent player
+	hashSet.Remove(newPlayer("2"))
+
+	got := hashSet.Contains(newPlayer("1"))
+	expected := true
+
+	if got != expected {
+		t.Errorf("Expected: %v, got: %v", expected, got)
+	}
+
+}
+
 type player struct {
 	Id   string
 	Age  int
