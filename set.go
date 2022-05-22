@@ -14,52 +14,18 @@ func NewHashSet[V comparable, T SetEntry[V]]() HashSet[V, T] {
 	}
 }
 
-func (s HashSet[V, T]) Put(entry T) {
+func (s HashSet[V, T]) Add(entry T) {
 	s.entries[entry.GetKey()] = entry
 }
 
-func (s HashSet[V, T]) Len() int {
+func (s HashSet[V, T]) IsEmpty() bool {
+	return len(s.entries) == 0
+}
+
+func (s HashSet[V, T]) Size() int {
 	return len(s.entries)
 }
 
 //func (s hashSet) Exists[T SetEntry, K any](entry T) bool {
 //
 //}
-
-type Student struct {
-	Dni      string
-	Edad     int
-	Nombre   string
-	Apellido string
-}
-
-type StudentKey struct {
-	Dni string
-}
-
-func NewStudent(dni string) Student {
-	return Student{
-		Dni:      dni,
-		Nombre:   "nombre",
-		Apellido: "apellido",
-		Edad:     23,
-	}
-}
-
-func (s Student) GetKey() StudentKey {
-	return StudentKey{
-		Dni: s.Dni,
-	}
-}
-
-/* func main() {
-	set := NewHashSet[StudentKey, Student]()
-
-	set.Put(NewStudent("1"))
-	set.Put(NewStudent("2"))
-	set.Put(NewStudent("3"))
-	set.Put(NewStudent("1"))
-
-	log.Println(set.Len())
-
-} */
