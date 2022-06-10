@@ -34,3 +34,9 @@ func (s *HashSet[V, T]) Contains(value T) bool {
 func (s *HashSet[V, T]) Remove(value T) {
 	delete(s.entries, value.GetKey())
 }
+
+func (s *HashSet[V, T]) Clear() {
+	for key := range s.entries {
+		delete(s.entries, key)
+	}
+}

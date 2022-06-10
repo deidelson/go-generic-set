@@ -154,6 +154,38 @@ func TestDeleteNoneExistentEntry(t *testing.T) {
 
 }
 
+func TestClearNoneEmptySet(t *testing.T) {
+	hashSet := NewHashSet[playerKey, *player]()
+
+	hashSet.Add(newPlayer("1"))
+	hashSet.Add(newPlayer("2"))
+	hashSet.Add(newPlayer("3"))
+
+	hashSet.Clear()
+
+	got := hashSet.Size()
+	expected := 0
+
+	if got != expected {
+		t.Errorf("Expected: %v, got: %v", expected, got)
+	}
+
+}
+
+func TestClearEmptySet(t *testing.T) {
+	hashSet := NewHashSet[playerKey, *player]()
+
+	hashSet.Clear()
+
+	got := hashSet.Size()
+	expected := 0
+
+	if got != expected {
+		t.Errorf("Expected: %v, got: %v", expected, got)
+	}
+
+}
+
 type player struct {
 	Id   string
 	Age  int
