@@ -28,7 +28,7 @@ func TestAddWithSameIdDifferentAttributes(t *testing.T) {
 	player1 := newPlayer("1")
 	player2 := newPlayer("1")
 
-	//Setting same attributes but they have the same id
+	//Setting different attributes but they have the same id
 	player2.Name = "some random name"
 	player2.Age = 50
 
